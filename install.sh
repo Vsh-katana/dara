@@ -5,7 +5,7 @@ REPO=""
 REF="main"
 DOMAIN=""
 INSTALL_DIR="/opt/dara-finance"
-usage() { echo "Usage: install.sh --repo OWNER/REPOSITORY --domain finance.example.com [--ref main] [--dir /opt/dara-finance]"; }
+usage() { echo "Usage: install.sh --repo OWNER/REPOSITORY [--domain finance.example.com] [--ref main] [--dir /opt/dara-finance]"; }
 while (($#)); do
   case "$1" in
     --repo) REPO="${2:-}"; shift 2 ;;
@@ -19,7 +19,12 @@ done
 if [[ ${EUID:-$(id -u)} -ne 0 ]]; then echo "Run this installer through sudo." >&2; exit 1; fi
 if [[ ! "$REPO" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ || "$REPO" == *"/../"* ]]; then echo "Pass a valid GitHub OWNER/REPOSITORY with --repo." >&2; exit 2; fi
 if [[ ! "$REF" =~ ^[A-Za-z0-9._/-]+$ || "$REF" == *..* ]]; then echo "Invalid Git ref." >&2; exit 2; fi
-if [[ ! "$DOMAIN" =~ ^([A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$ ]]; then echo "Pass a public DNS name such as finance.example.com." >&2; exit 2; fi
+if [[ -z "$DOMAIN" ]]; then
+  if [[ ! -t 2 ]]; then echo "A public domain is required. Run interactively or pass --domain for a non-interactive install." >&2; exit 2; fi
+  printf 'Enter the public domain for Dara (for example, finance.example.com): ' > /dev/tty
+  IFS= read -r DOMAIN < /dev/tty || { echo "Could not read the domain from the terminal." >&2; exit 2; }
+fi
+if [[ ! "$DOMAIN" =~ ^([A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?$ ]]; then echo "Enter a public DNS name such as finance.example.com." >&2; exit 2; fi
 if [[ "$DOMAIN" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then echo "Use a DNS name; public certificates are not issued for this server setup using an IP address." >&2; exit 2; fi
 case "${DOMAIN,,}" in localhost|*.localhost|*.local|*.internal|*.test) echo "Use a public DNS domain for Let’s Encrypt." >&2; exit 2 ;; esac
 

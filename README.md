@@ -12,20 +12,20 @@ A separate, multi-user self-hosted edition of Dara. Each account receives its ow
 
 ## One-line GitHub installer
 
-After publishing the contents of this directory to a GitHub repository, install with:
+Install from GitHub with:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Vsh-katana/dara/main/install.sh | sudo bash -s -- --repo Vsh-katana/dara --domain finance.example.com
+curl -fsSL https://raw.githubusercontent.com/Vsh-katana/dara/main/install.sh | sudo bash -s -- --repo Vsh-katana/dara
 ```
 
-Replace `finance.example.com` with a domain you control. The script supports Debian 12 or newer and Ubuntu 22.04 or newer. It installs Docker Engine and Compose from Docker's official apt repository when missing, creates a high-entropy session secret file, builds the application, and starts the services.
+During installation, enter the public domain you control when prompted. For unattended installation, pass `--domain finance.example.com` after `--repo Vsh-katana/dara`. The script supports Debian 12 or newer and Ubuntu 22.04 or newer. It installs Docker Engine and Compose from Docker's official apt repository when missing, creates a high-entropy session secret file, builds the application, and starts the services.
 
 ## Before running the installer
 
 1. Point the domain's A record (and, if used, AAAA record) at the server.
 2. Ensure inbound TCP ports 80 and 443 are reachable from the internet; Caddy uses them for HTTP-01 validation and HTTPS traffic. The app container itself is not published to the host.
-3. Run the one-line installer as shown. Caddy requests the production Let's Encrypt certificate and renews it automatically.
-4. Open `https://finance.example.com` and create an account. Each person can register with their own username and password.
+3. Run the one-line installer and enter the same domain when prompted. Caddy requests the production Let's Encrypt certificate and renews it automatically.
+4. Open `https://your-domain` and create an account. Each person can register with their own username and password.
 
 The installer enables public registration by default and caps the server at 500 accounts. Edit `ALLOW_SIGNUP` and `MAX_ACCOUNTS` in `/opt/dara-finance/.env` to change these limits. To pause new account creation, set `ALLOW_SIGNUP=0` and run `docker compose up -d` from that directory. Existing users can continue to sign in.
 
