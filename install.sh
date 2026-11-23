@@ -69,9 +69,10 @@ command -v openssl >/dev/null 2>&1 || { apt-get update && apt-get install -y ope
 printf 'Checking Docker access to the Python package index (%s)...\n' "$PIP_INDEX_URL"
 if ! docker run --rm -e "PIP_INDEX_URL=$PIP_INDEX_URL" python:3.12-slim-bookworm python -c \
   'import os,urllib.request; request=urllib.request.Request(os.environ["PIP_INDEX_URL"],headers={"User-Agent":"Dara-installer/1"}); urllib.request.urlopen(request,timeout=15).close()' \
-  >/dev/null 2>&1; then
+  >/dev/null; then
   cat >&2 <<EOF
-Docker cannot reach the configured Python package index: $PIP_INDEX_URL
+Docker preflight could not verify access to the Python package index: $PIP_INDEX_URL
+The Docker error above may indicate DNS/network trouble or an unavailable Python base image.
 Fix Docker DNS/internet access, or rerun with --pip-index-url https://YOUR-REACHABLE-MIRROR/simple.
 For an existing installation, run: cd $INSTALL_DIR && docker compose up -d --build
 EOF

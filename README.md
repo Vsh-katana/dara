@@ -43,7 +43,7 @@ The `.secrets/session_secret` file is kept outside the image and mounted as a Co
 
 ### Docker build cannot resolve PyPI
 
-The application image installs FastAPI and Uvicorn from the configured Python package index. If the installer reports that Docker cannot reach it, first check DNS on the host with `getent hosts pypi.org`, then from Docker with:
+The application image installs FastAPI and Uvicorn from the configured Python package index. If the installer preflight fails, first check DNS on the host with `getent hosts pypi.org`, then from Docker with:
 
 ```sh
 docker run --rm python:3.12-slim-bookworm python -c 'import socket; print(socket.gethostbyname("pypi.org"))'
