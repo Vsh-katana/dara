@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.env
+.git/
+.gitignore
+*.zip
+*.db
+*.sqlite*
+*.log
+
+.secrets/
+data/
+**/seed.json

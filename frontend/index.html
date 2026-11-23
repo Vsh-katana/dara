@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b0d11">
+  <meta name="description" content="مدیریت مالی شخصی، گزارش‌های دقیق و برنامه‌ریزی بودجه">
+  <title>دارا | مدیریت مالی</title>
+  <link rel="manifest" href="/static/manifest.webmanifest">
+  <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/css/app.css">
+  <script type="module" src="/static/js/app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><div class="brand-mark">د</div><div><b>دارا</b><small>مدیریت مالی شخصی</small></div></div>
+      <div class="profile-chip"><span class="avatar">◈</span><div><b id="accountName">حساب من</b><small id="accountStatus">فضای مالی اختصاصی</small></div><span class="online-dot"></span></div>
+      <nav class="side-nav" id="sideNav" aria-label="ناوبری اصلی"></nav>
+      <div class="sidebar-version">DĀRA FINANCE · SERVER</div>
+    </aside>
+    <main class="main-area">
+      <header class="topbar">
+        <div class="heading-wrap">
+          <button class="icon-button mobile-menu" id="menuBtn" aria-label="منو">☰</button>
+          <div class="page-heading"><h1 id="pageTitle">خلاصه مالی</h1><p id="pageSubtitle">نمای کلی وضعیت مالی شما</p></div>
+        </div>
+        <div class="top-actions">
+          <button class="icon-button notification-trigger" id="notificationBtn" title="اعلان‌ها">♧<span class="notification-count" id="notificationCount"></span></button>
+          <button class="outline-button language-trigger" id="languageBtn">EN</button>
+          <button class="outline-button" id="logoutBtn" title="خروج از حساب" aria-label="خروج از حساب">↪</button>
+          <button class="primary-button" id="quickAddBtn"><span>＋</span><span class="btn-label" data-i="newTransaction">تراکنش جدید</span></button>
+        </div>
+      </header>
+      <div class="page-container" id="pageContainer"><div class="loading-state"><span class="spinner"></span><span data-i="loading">در حال بارگذاری اطلاعات مالی…</span></div></div>
+    </main>
+    <nav class="mobile-nav" id="mobileNav" aria-label="ناوبری موبایل"></nav>
+  </div>
+  <div id="modalRoot"></div>
+  <div id="toastRoot" class="toast-root" aria-live="polite"></div>
+</body>
+</html>

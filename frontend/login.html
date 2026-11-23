@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101112">
+  <meta name="description" content="Dara Finance secure personal accounting">
+  <title>دارا | ورود امن</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="stylesheet" href="/static/css/auth.css">
+  <script type="module" src="/static/js/login.js"></script>
+</head>
+<body class="auth-body">
+  <main class="auth-layout">
+    <section class="auth-card" aria-labelledby="authTitle">
+      <div class="auth-brand"><span class="auth-mark">د</span><div><strong>دارا</strong><small data-copy="brandSub">مدیریت مالی شخصی</small></div></div>
+      <button id="languageToggle" class="auth-language" type="button">EN</button>
+      <p class="auth-eyebrow" data-copy="secureSpace">فضای مالی اختصاصی</p>
+      <h1 id="authTitle" data-copy="signIn">ورود به حساب</h1>
+      <p class="auth-intro" data-copy="intro">برای مشاهده و مدیریت اطلاعات مالی، وارد حساب خود شوید.</p>
+      <form id="authForm" autocomplete="on">
+        <label for="username" data-copy="username">نام کاربری</label>
+        <input id="username" name="username" autocomplete="username" minlength="3" maxlength="32" pattern="[A-Za-z0-9][A-Za-z0-9_.-]{2,31}" required>
+        <label for="password" data-copy="password">گذرواژه</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" minlength="12" maxlength="1024" required>
+        <div id="authError" class="auth-error" role="alert" hidden></div>
+        <button id="submitButton" class="primary-button auth-submit" type="submit" data-copy="signIn">ورود به حساب</button>
+      </form>
+      <p class="auth-switch"><span id="switchPrompt" data-copy="noAccount">حساب ندارید؟</span> <button id="modeToggle" type="button" data-copy="createAccount">ایجاد حساب</button></p>
+      <p class="auth-note" data-copy="isolation">اطلاعات هر حساب در فضای جداگانه نگهداری می‌شود.</p>
+    </section>
+  </main>
+</body>
+</html>

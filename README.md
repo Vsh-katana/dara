@@ -6,7 +6,7 @@ A separate, multi-user self-hosted edition of Dara. Each account receives its ow
 
 - Individual username and password accounts with PBKDF2 password hashes, expiring opaque sessions, `HttpOnly`/`Secure`/`SameSite=Strict` cookies, CSRF checks, origin checks, and login/signup rate limits.
 - One database per account under a persistent Docker volume. Registration creates a blank finance workspace; it does not import the desktop workbook.
-- Same bilingual Persian/English interface, Jalali/Gregorian dates, accounting ledger, reports, accounts, budgets, and exports.
+- Same bilingual Persian/English interface, Jalali/Gregorian dates, accounting ledger, reports, accounts, budgets, and exports; automatic, light, and dark modes with six accent colors and teal as the default.
 - Docker Compose with the application bound only inside the Compose network and Caddy at the public edge.
 - Automatic HTTPS and certificate renewal using Let's Encrypt.
 
@@ -42,4 +42,3 @@ docker compose up -d --build
 The `.secrets/session_secret` file is kept outside the image and mounted as a Compose secret. Docker's named volume `dara_data` holds the authentication database and per-user databases. `caddy_data` holds the ACME account and certificate state. Back up these volumes and `.secrets/session_secret` before upgrades or moving the server. Do not publish the app's port directly or copy the desktop `data/` directory into this deployment.
 
 The installer expects this server deployment as the root of the GitHub repository. See `compose.yaml`, `Dockerfile`, and `Caddyfile` before installing; the installer is intentionally readable and accepts an explicit repository and ref.
-
