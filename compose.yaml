@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        PIP_INDEX_URL: ${PIP_INDEX_URL:-https://pypi.org/simple}
     restart: unless-stopped
     environment:
       DARA_DATA_DIR: /var/lib/dara
@@ -64,3 +66,4 @@ secrets:
 networks:
   dara_net:
     driver: bridge
+
